@@ -15,3 +15,4 @@ C:\Users\user\Documents\BACS\OOP-CustomProgram\CustomProgram\obj\Debug\net10.0\r
 C:\Users\user\Documents\BACS\OOP-CustomProgram\CustomProgram\obj\Debug\net10.0\CustomProgram.pdb
 C:\Users\user\Documents\BACS\OOP-CustomProgram\CustomProgram\obj\Debug\net10.0\CustomProgram.genruntimeconfig.cache
 C:\Users\user\Documents\BACS\OOP-CustomProgram\CustomProgram\obj\Debug\net10.0\ref\CustomProgram.dll
+C:\Users\user\Documents\BACS\OOP-CustomProgram\CustomProgram\obj\Debug\net10.0\CustomProgram.sourcelink.json

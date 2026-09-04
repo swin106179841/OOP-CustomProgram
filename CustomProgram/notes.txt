@@ -1,0 +1,32 @@
+Game
+    run
+    window
+    rendering
+        texture manager
+            load texures/ spritesheet
+            
+        tilemap
+        object
+            player
+                move
+                push -> block
+                interact
+                pickup
+            block
+                push
+                trigger switch
+            collectable
+                pickup
+            trap
+                trigger
+            switch
+                state
+            exit/goal
+    sound
+        music
+        sound effect
+    gamestate
+        win
+        loose
+        reset       
+        time 

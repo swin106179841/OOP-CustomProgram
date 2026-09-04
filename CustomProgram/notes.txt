@@ -4,24 +4,27 @@ Game
     rendering
         texture manager
             load texures/ spritesheet
-            
+            get texture
+            animations
         tilemap
-        object
-            player
-                move
-                push -> block
-                interact
-                pickup
-            block
-                push
-                trigger switch
-            collectable
-                pickup
-            trap
-                trigger
-            switch
-                state
-            exit/goal
+        background
+    object
+        player
+            move
+            push -> block
+            interact
+            pickup
+        block
+            push
+            trigger switch
+        collectable
+            pickup
+        trap
+            trigger
+        switch
+            state
+        exit/goal
+        render
     sound
         music
         sound effect

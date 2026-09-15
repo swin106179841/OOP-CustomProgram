@@ -8,9 +8,10 @@ namespace CustomProgram
         Left,
         Right
     }
-    class ObjectInteractable: Object
+    class ObjectInteractable: GameObject
     {
         private int _uid;
+        public ObjectInteractable(): this(0, 0, 0) {}
         public ObjectInteractable(int x, int y, int textureID): base(x, y, textureID)
         {
             _uid = ObjectIDs.NewID();

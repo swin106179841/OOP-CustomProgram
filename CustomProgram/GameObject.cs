@@ -7,30 +7,32 @@ namespace CustomProgram
     {
         private int _x;
         private int _y;
-        private int _textureID;
+        // what texture in spritesheet
+        private int _spriteIndex;
+        // what texture from texture manager
         private int _textureIndex;
         private int _heightOffset;
         public DrawingOptions DOpts;
         public GameObject(): this(0, 0, 0) {}
-        public GameObject(int x, int y, int textureID)
+        public GameObject(int x, int y, int spriteIndex)
         {
             X = x;
             Y = y;
-            TextureID = textureID;
-            DOpts = SplashKit.OptionWithBitmapCell(textureID);
+            SpriteIndex = spriteIndex;
+            DOpts = SplashKit.OptionWithBitmapCell(spriteIndex);
             DOpts.ScaleX = Settings.RenderScale;
             DOpts.ScaleY = Settings.RenderScale;
         }
 
-        public virtual void Draw(Bitmap spriteSheet)
+        public virtual void Draw(Bitmap texture)
         {
-            SplashKit.DrawBitmap(spriteSheet, X * 32 * Settings.RenderScale, (Y * 32 * Settings.RenderScale) - (HeightOffset * Settings.RenderScale), DOpts);
+            SplashKit.DrawBitmap(texture, X * 32 * Settings.RenderScale, (Y * 32 * Settings.RenderScale) - (HeightOffset * Settings.RenderScale), DOpts);
         }
         public virtual void Load(StreamReader sr)
         {
             X = sr.ReadInteger();
             Y = sr.ReadInteger();
-            TextureID = sr.ReadInteger();
+            SpriteIndex = sr.ReadInteger();
             TextureIndex = sr.ReadInteger();
             HeightOffset = sr.ReadInteger();
         }
@@ -44,10 +46,10 @@ namespace CustomProgram
             get => _y;
             set => _y = value;
         }
-        public int TextureID
+        public int SpriteIndex
         {
-            get => _textureID;
-            set => _textureID = value;
+            get => _spriteIndex;
+            set => _spriteIndex = value;
         }
         public int TextureIndex
         {

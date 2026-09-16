@@ -33,3 +33,6 @@ Game
         loose
         reset       
         time 
+        map 
+        object manager
+        

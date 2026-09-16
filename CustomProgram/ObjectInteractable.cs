@@ -11,8 +11,8 @@ namespace CustomProgram
     class ObjectInteractable: GameObject
     {
         private int _uid;
-        public ObjectInteractable(): this(0, 0, 0) {}
-        public ObjectInteractable(int x, int y, int textureID): base(x, y, textureID)
+        public ObjectInteractable(): this(0, 0, 0, SplashKit.LoadBitmap("fallback", "./assets/fallback.png")) {}
+        public ObjectInteractable(int x, int y, int textureID, Bitmap texture): base(x, y, textureID, texture)
         {
             _uid = ObjectIDs.NewID();
         }

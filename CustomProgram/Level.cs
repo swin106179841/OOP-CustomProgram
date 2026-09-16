@@ -3,7 +3,7 @@ using SplashKitSDK;
 using System.IO;
 namespace CustomProgram
 {
-    class Level
+    public class Level
     {
         private int _levelWidth;
         private int _levelHeight;
@@ -126,7 +126,7 @@ namespace CustomProgram
             // draw objects
             foreach (GameObject obj in _objects)
             {
-                obj.Draw(_texMan.RequestTexture(obj.TextureIndex));
+                obj.Draw();
             }
         }
     }

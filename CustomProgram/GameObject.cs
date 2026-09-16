@@ -3,18 +3,19 @@ using ShapeDrawer;
 using SplashKitSDK;
 namespace CustomProgram
 {
-    public abstract class GameObject
+    public abstract class GameObject: IDrawable
     {
-        private int _x;
-        private int _y;
+        private float _x;
+        private float _y;
         // what texture in spritesheet
         private int _spriteIndex;
         // what texture from texture manager
         private int _textureIndex;
+        private Bitmap _texture;
         private int _heightOffset;
         public DrawingOptions DOpts;
-        public GameObject(): this(0, 0, 0) {}
-        public GameObject(int x, int y, int spriteIndex)
+        public GameObject(): this(0, 0, 0, SplashKit.LoadBitmap("fallback", "./assets/fallback.png")) {}
+        public GameObject(float x, float y, int spriteIndex, Bitmap texture)
         {
             X = x;
             Y = y;
@@ -22,11 +23,11 @@ namespace CustomProgram
             DOpts = SplashKit.OptionWithBitmapCell(spriteIndex);
             DOpts.ScaleX = Settings.RenderScale;
             DOpts.ScaleY = Settings.RenderScale;
+            _texture = texture;
         }
-
-        public virtual void Draw(Bitmap texture)
+        public virtual void Draw()
         {
-            SplashKit.DrawBitmap(texture, X * 32 * Settings.RenderScale, (Y * 32 * Settings.RenderScale) - (HeightOffset * Settings.RenderScale), DOpts);
+            SplashKit.DrawBitmap(_texture, X * 32 * Settings.RenderScale, (Y * 32 * Settings.RenderScale) - (HeightOffset * Settings.RenderScale), DOpts);
         }
         public virtual void Load(StreamReader sr)
         {
@@ -36,12 +37,12 @@ namespace CustomProgram
             TextureIndex = sr.ReadInteger();
             HeightOffset = sr.ReadInteger();
         }
-        public int X
+        public float X
         {
             get => _x;
             set => _x = value;
         }
-        public int Y
+        public float Y
         {
             get => _y;
             set => _y = value;
@@ -60,6 +61,11 @@ namespace CustomProgram
         {
             get => _heightOffset;
             set => _heightOffset = value;
+        }
+        public Bitmap Texture
+        {
+            get => _texture;
+            set => _texture = value;
         }
     }
 }

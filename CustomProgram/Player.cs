@@ -17,6 +17,8 @@ namespace CustomProgram
         private Level _level;
         private Bitmap _texture;
         public DrawingOptions DOpts;
+        private bool _isMoving = false;
+        private int _frameCount = 0;
         public Player(Level level)
         {
             _level = level;
@@ -31,23 +33,65 @@ namespace CustomProgram
         }
         public void Move(PlayerMoveDirection dir)
         {
-            switch (dir)
+            if (!_isMoving)
             {
-                case PlayerMoveDirection.Up:
-                    // check collision then move
-                    Y -= 1;
-                    break;
-                case PlayerMoveDirection.Down:
-                    Y += 1;
-                    break;
-                case PlayerMoveDirection.Left:
-                    X -= 1;
-                    break;
-                case PlayerMoveDirection.Right:
-                    X += 1;
-                    break;
-                default:
-                    break;
+                // check collision
+                // check ground
+                int nextTile = -1;
+                switch (dir)
+                {
+                    case PlayerMoveDirection.Up:
+                        nextTile = _level.TileAt(X, Y - 1);
+                        break;
+                    case PlayerMoveDirection.Down:
+                        nextTile = _level.TileAt(X, Y + 1);
+                        break;
+                    case PlayerMoveDirection.Left:
+                        nextTile = _level.TileAt(X - 1, Y);
+                        break;
+                    case PlayerMoveDirection.Right:
+                        nextTile = _level.TileAt(X + 1, Y);
+                        break;
+                }
+                Console.WriteLine("next tile int dir {0} is {1}", dir, nextTile);
+                if (_level.IsFloor(nextTile))
+                {
+                    _direction = dir;
+                    _isMoving = true;
+                }
+            }
+        }
+        public void Update()
+        {
+            // update position according to animation
+            if (_isMoving)
+            {
+                // 60fps so move for 30 frames
+                // 1 / 30 = 0.0333
+                _frameCount++;
+                switch (_direction)
+                {
+                    case PlayerMoveDirection.Up:
+                        Y -= Settings.PlayerMoveSpeed;
+                        break;
+                    case PlayerMoveDirection.Down:
+                        Y += Settings.PlayerMoveSpeed;
+                        break;
+                    case PlayerMoveDirection.Left:
+                        X -= Settings.PlayerMoveSpeed;
+                        break;
+                    case PlayerMoveDirection.Right:
+                        X += Settings.PlayerMoveSpeed;
+                        break;
+                }
+
+                if (_frameCount >= 30)
+                {
+                    _isMoving = false;
+                    _frameCount = 0;
+                    X = (float)Math.Round(X);
+                    Y = (float)Math.Round(Y);
+                }
             }
         }
         public void SetLevel(Level level) { _level = level; }

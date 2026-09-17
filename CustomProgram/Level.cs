@@ -9,6 +9,7 @@ namespace CustomProgram
         private int _levelHeight;
         private List<int> _scene = [];
         private List<Object> _objects = [];
+        private List<int> _floorTiles = [22, 23];
         private TextureManager _texMan = new TextureManager();
         public Level(String levelPath)
         {
@@ -37,7 +38,8 @@ namespace CustomProgram
                 int tilesCount = sr.ReadInteger();
                 SplashKit.BitmapSetCellDetails(spriteSheet, tileWidth, tileHeight, tilesX, tilesY, tilesCount);
                 _texMan.AddTexture(spriteSheet);
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine("Error loading spritesheet from level: " + levelPath);
                 Console.WriteLine("Error: " + e.Message);
@@ -144,6 +146,38 @@ namespace CustomProgram
             {
                 obj.Draw();
             }
+        }
+        // returns -1 on out of bounds
+        public int TileAt(int index)
+        {
+            if (index < _scene.Count() && index > 0)
+            {
+                return _scene[index];
+            } else
+            {
+                return -1;
+            }
+        }
+        // returns -1 on out of bounds
+        public int TileAt(int x, int y)
+        {
+            int index = y * _levelWidth + x;
+
+            return TileAt(index);
+        }
+        public int TileAt(float x, float y)
+        {
+            int index = (int)y * _levelWidth + (int)x;
+            return TileAt(index);
+        }
+        public bool IsFloor(int tile)
+        {
+            foreach (int t in _floorTiles)
+            {
+                if (tile == t)
+                    return true;
+            }
+            return false;
         }
     }
 }

@@ -17,24 +17,26 @@ namespace CustomProgram
 
             Level myLevel = new Level(_currentLevel);
             Player p1 = new Player(myLevel);
+            p1.X = 3;
+            p1.Y = 3;
 
             while (!SplashKit.WindowCloseRequested(_windowName))
             {
                 SplashKit.ProcessEvents();
                 // player input
-                if (SplashKit.KeyTyped(KeyCode.WKey))
+                if (SplashKit.KeyDown(KeyCode.WKey))
                 {
                     p1.Move(PlayerMoveDirection.Up);
                 }
-                else if (SplashKit.KeyTyped(KeyCode.SKey))
+                else if (SplashKit.KeyDown(KeyCode.SKey))
                 {
                     p1.Move(PlayerMoveDirection.Down);
                 }
-                else if (SplashKit.KeyTyped(KeyCode.AKey))
+                else if (SplashKit.KeyDown(KeyCode.AKey))
                 {
                     p1.Move(PlayerMoveDirection.Left);
                 }
-                else if (SplashKit.KeyTyped(KeyCode.DKey))
+                else if (SplashKit.KeyDown(KeyCode.DKey))
                 {
                     p1.Move(PlayerMoveDirection.Right);
                 }
@@ -43,6 +45,7 @@ namespace CustomProgram
                 {
                     myLevel.Load(_currentLevel);
                 }
+                p1.Update();
                 SplashKit.ClearScreen(Color.Black);
 
                 myLevel.Draw();

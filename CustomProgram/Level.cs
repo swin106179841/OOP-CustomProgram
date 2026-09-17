@@ -74,8 +74,8 @@ namespace CustomProgram
                         case "ObjectStatic":
                             obj = new ObjectStatic();
                             break;
-                        case "ObjectInteractable":
-                            obj = new ObjectInteractable();
+                        case "ObjectPushable":
+                            obj = new ObjectPushable();
                             break;
                         default:
                             throw new InvalidDataException();
@@ -141,10 +141,20 @@ namespace CustomProgram
                     SplashKit.DrawBitmap(_texMan.RequestTexture(0), x * (32 * Settings.RenderScale), y * (32 * Settings.RenderScale), cellOpts);
                 }
             }
-            // draw objects
+
+        }
+        public void DrawObjects()
+        {
             foreach (GameObject obj in _objects)
             {
                 obj.Draw();
+            }
+        }
+        public void Update()
+        {
+            foreach (GameObject obj in _objects)
+            {
+                obj.Update();
             }
         }
         // returns -1 on out of bounds
@@ -153,7 +163,8 @@ namespace CustomProgram
             if (index < _scene.Count() && index > 0)
             {
                 return _scene[index];
-            } else
+            }
+            else
             {
                 return -1;
             }
@@ -178,6 +189,17 @@ namespace CustomProgram
                     return true;
             }
             return false;
+        }
+        public GameObject? ObjectAt(int x, int y)
+        {
+            foreach (GameObject obj in _objects)
+            {
+                if (obj.X == x && obj.Y == y)
+                {
+                    return obj;
+                }
+            }
+            return null;
         }
     }
 }

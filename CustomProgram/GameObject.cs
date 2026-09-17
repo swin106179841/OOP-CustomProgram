@@ -29,6 +29,10 @@ namespace CustomProgram
         {
             SplashKit.DrawBitmap(_texture, X * 32 * Settings.RenderScale, (Y * 32 * Settings.RenderScale) - (HeightOffset * Settings.RenderScale), DOpts);
         }
+        public virtual void Update()
+        {
+            
+        }
         public virtual void Load(StreamReader sr)
         {
             X = sr.ReadInteger();
@@ -36,6 +40,10 @@ namespace CustomProgram
             SpriteIndex = sr.ReadInteger();
             TextureIndex = sr.ReadInteger();
             HeightOffset = sr.ReadInteger();
+        }
+        public virtual bool Pushable()
+        {
+            return false;
         }
         public float X
         {

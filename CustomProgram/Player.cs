@@ -2,18 +2,11 @@ using SplashKitSDK;
 
 namespace CustomProgram
 {
-    public enum PlayerMoveDirection
-    {
-        Up,
-        Down,
-        Left,
-        Right
-    }
     public class Player : IDrawable
     {
         private float _x;
         private float _y;
-        private PlayerMoveDirection _direction;
+        private MoveDirection _direction;
         private Level _level;
         private Bitmap _texture;
         public DrawingOptions DOpts;
@@ -31,33 +24,50 @@ namespace CustomProgram
         {
             SplashKit.DrawBitmap(_texture, X * 32 * Settings.RenderScale, Y * 32 * Settings.RenderScale, DOpts);
         }
-        public void Move(PlayerMoveDirection dir)
+        public void Move(MoveDirection dir)
         {
             if (!_isMoving)
             {
-                // check collision
+                // check collision for objects
+                GameObject? obj = null;
                 // check ground
                 int nextTile = -1;
+                int followingTile = -1;
                 switch (dir)
                 {
-                    case PlayerMoveDirection.Up:
+                    case MoveDirection.Up:
                         nextTile = _level.TileAt(X, Y - 1);
+                        followingTile = _level.TileAt(X, Y - 2);
+                        obj = _level.ObjectAt((int)X, (int)Y - 1);
                         break;
-                    case PlayerMoveDirection.Down:
+                    case MoveDirection.Down:
                         nextTile = _level.TileAt(X, Y + 1);
+                        followingTile = _level.TileAt(X, Y + 2);
+                        obj = _level.ObjectAt((int)X, (int)Y + 1);
                         break;
-                    case PlayerMoveDirection.Left:
+                    case MoveDirection.Left:
                         nextTile = _level.TileAt(X - 1, Y);
+                        followingTile = _level.TileAt(X - 2, Y);
+                        obj = _level.ObjectAt((int)X - 1, (int)Y);
                         break;
-                    case PlayerMoveDirection.Right:
+                    case MoveDirection.Right:
                         nextTile = _level.TileAt(X + 1, Y);
+                        followingTile = _level.TileAt(X + 2, Y);
+                        obj = _level.ObjectAt((int)X + 1, (int)Y);
                         break;
                 }
-                Console.WriteLine("next tile int dir {0} is {1}", dir, nextTile);
                 if (_level.IsFloor(nextTile))
                 {
-                    _direction = dir;
-                    _isMoving = true;
+                    if (obj == null)
+                    {
+                        _direction = dir;
+                        _isMoving = true;
+                    } else if (obj is ObjectPushable pushable && _level.IsFloor(followingTile))
+                    {
+                        _direction = dir;
+                        _isMoving = true;
+                        pushable.Move(dir);
+                    }
                 }
             }
         }
@@ -71,21 +81,21 @@ namespace CustomProgram
                 _frameCount++;
                 switch (_direction)
                 {
-                    case PlayerMoveDirection.Up:
+                    case MoveDirection.Up:
                         Y -= Settings.PlayerMoveSpeed;
                         break;
-                    case PlayerMoveDirection.Down:
+                    case MoveDirection.Down:
                         Y += Settings.PlayerMoveSpeed;
                         break;
-                    case PlayerMoveDirection.Left:
+                    case MoveDirection.Left:
                         X -= Settings.PlayerMoveSpeed;
                         break;
-                    case PlayerMoveDirection.Right:
+                    case MoveDirection.Right:
                         X += Settings.PlayerMoveSpeed;
                         break;
                 }
 
-                if (_frameCount >= 30)
+                if (_frameCount >= Settings.MoveFrames)
                 {
                     _isMoving = false;
                     _frameCount = 0;
@@ -97,7 +107,7 @@ namespace CustomProgram
         public void SetLevel(Level level) { _level = level; }
         public float X { get => _x; set => _x = value; }
         public float Y { get => _y; set => _y = value; }
-        public PlayerMoveDirection Direction { get => _direction; set => _direction = value; }
+        public MoveDirection Direction { get => _direction; set => _direction = value; }
         public Bitmap Texture
         {
             get => _texture;

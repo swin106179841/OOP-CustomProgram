@@ -9,7 +9,7 @@ LVLV1 ; magic num
 ./assets/rock.png
 ./assets/barrel.png
 2 ; objects
-ObjectInteractable ; object type
+ObjectPushable ; object type
 2 ; x 
 2 ; y
 0 ; textID

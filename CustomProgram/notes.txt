@@ -36,3 +36,8 @@ Game
         map 
         object manager
         
+for object collision
+    check if obj at X, Y before player moves
+    if so check if that object can move (movable and space to move)
+    update obj pos like player
+    

@@ -5,7 +5,7 @@ namespace CustomProgram
     class Game
     {
         private String _windowName;
-        private String _currentLevel = "./levels/1.lvl";
+        private String _currentLevel = "./levels/2.lvl";
         public Game() : this("CustomProgram") { }
         public Game(String windowTitle)
         {

@@ -15,10 +15,12 @@ namespace CustomProgram
         public Player(Level level)
         {
             _level = level;
-            _texture = SplashKit.LoadBitmap("fallback", "./assets/fallback.png");
-            DOpts = SplashKit.OptionDefaults();
+            _texture = SplashKit.LoadBitmap("player", "./assets/player.png");
+            SplashKit.BitmapSetCellDetails(_texture, 32, 32, 4, 1, 4);
+            DOpts = SplashKit.OptionWithBitmapCell(0);
             DOpts.ScaleX = Settings.RenderScale;
             DOpts.ScaleY = Settings.RenderScale;
+            _direction = MoveDirection.Down;
         }
         public void Draw()
         {
@@ -28,6 +30,7 @@ namespace CustomProgram
         {
             if (!_isMoving)
             {
+                _direction = dir;
                 // check collision for objects
                 GameObject? obj = null;
                 GameObject? followingObj = null;
@@ -65,11 +68,10 @@ namespace CustomProgram
                 {
                     if (obj == null)
                     {
-                        _direction = dir;
                         _isMoving = true;
-                    } else if (obj is ObjectPushable pushable && _level.IsFloor(followingTile) && followingObj == null)
+                    }
+                    else if (obj is ObjectPushable pushable && _level.IsFloor(followingTile) && followingObj == null)
                     {
-                        _direction = dir;
                         _isMoving = true;
                         pushable.Move(dir);
                     }
@@ -78,6 +80,7 @@ namespace CustomProgram
         }
         public void Update()
         {
+            DOpts = SplashKit.OptionWithBitmapCell((int)_direction, DOpts);
             // update position according to animation
             if (_isMoving)
             {

@@ -40,6 +40,7 @@ namespace CustomProgram
             SpriteIndex = sr.ReadInteger();
             TextureIndex = sr.ReadInteger();
             HeightOffset = sr.ReadInteger();
+            DOpts = SplashKit.OptionWithBitmapCell(SpriteIndex, DOpts);
         }
         public virtual bool Pushable()
         {

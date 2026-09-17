@@ -3,7 +3,7 @@ namespace CustomProgram
 {
     public static class Settings
     {
-        public const float RenderScale = 2.0f;
+        public const float RenderScale = 1.5f;
         public const int TileSize = 32;
         public static int MoveFrames = 20;
         // formula: 1 / MoveFrames

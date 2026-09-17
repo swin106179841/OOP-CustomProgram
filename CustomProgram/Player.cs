@@ -30,6 +30,7 @@ namespace CustomProgram
             {
                 // check collision for objects
                 GameObject? obj = null;
+                GameObject? followingObj = null;
                 // check ground
                 int nextTile = -1;
                 int followingTile = -1;
@@ -39,21 +40,25 @@ namespace CustomProgram
                         nextTile = _level.TileAt(X, Y - 1);
                         followingTile = _level.TileAt(X, Y - 2);
                         obj = _level.ObjectAt((int)X, (int)Y - 1);
+                        followingObj = _level.ObjectAt((int)X, (int)Y - 2);
                         break;
                     case MoveDirection.Down:
                         nextTile = _level.TileAt(X, Y + 1);
                         followingTile = _level.TileAt(X, Y + 2);
                         obj = _level.ObjectAt((int)X, (int)Y + 1);
+                        followingObj = _level.ObjectAt((int)X, (int)Y + 2);
                         break;
                     case MoveDirection.Left:
                         nextTile = _level.TileAt(X - 1, Y);
                         followingTile = _level.TileAt(X - 2, Y);
                         obj = _level.ObjectAt((int)X - 1, (int)Y);
+                        followingObj = _level.ObjectAt((int)X - 2, (int)Y);
                         break;
                     case MoveDirection.Right:
                         nextTile = _level.TileAt(X + 1, Y);
                         followingTile = _level.TileAt(X + 2, Y);
                         obj = _level.ObjectAt((int)X + 1, (int)Y);
+                        followingObj = _level.ObjectAt((int)X + 2, (int)Y);
                         break;
                 }
                 if (_level.IsFloor(nextTile))
@@ -62,7 +67,7 @@ namespace CustomProgram
                     {
                         _direction = dir;
                         _isMoving = true;
-                    } else if (obj is ObjectPushable pushable && _level.IsFloor(followingTile))
+                    } else if (obj is ObjectPushable pushable && _level.IsFloor(followingTile) && followingObj == null)
                     {
                         _direction = dir;
                         _isMoving = true;

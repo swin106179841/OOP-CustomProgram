@@ -12,6 +12,12 @@ namespace CustomProgram
         private TextureManager _texMan = new TextureManager();
         public Level(String levelPath)
         {
+            Load(levelPath);
+        }
+        public void Load(String levelPath)
+        {
+            // clear level
+            Clear();
             int errorCount = 0;
             StreamReader sr = File.OpenText(levelPath);
             // magic number
@@ -73,6 +79,7 @@ namespace CustomProgram
                             throw new InvalidDataException();
                     }
                     obj.Load(sr);
+                    obj.Texture = _texMan.RequestTexture(obj.TextureIndex);
                     _objects.Add(obj);
                 }
             }
@@ -109,6 +116,15 @@ namespace CustomProgram
                 _objects.Clear();
                 _texMan.RemoveAllTextures();
             }
+            sr.Close();
+        }
+        public void Clear()
+        {
+            _scene.Clear();
+            _objects.Clear();
+            _texMan.RemoveAllTextures();
+            _levelWidth = 0;
+            _levelHeight = 0;
         }
         public void Draw()
         {

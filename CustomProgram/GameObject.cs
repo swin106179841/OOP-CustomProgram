@@ -33,7 +33,7 @@ namespace CustomProgram
             {
                 
                 double shadowX = X * 32 * Settings.RenderScale - ((32 * Settings.RenderScale) - 32) / 2;
-                double shadowY = Y * 32 * Settings.RenderScale - ((32 * Settings.RenderScale) - 32) / 2 + (32 * Settings.RenderScale - 9 * Settings.RenderScale);
+                double shadowY = Y * 32 * Settings.RenderScale - ((32 * Settings.RenderScale) - 32) / 2 + (32 * Settings.RenderScale - 8 * Settings.RenderScale);
                 SplashKit.FillEllipse(Color.RGBAColor(34, 38, 28, 127), shadowX, shadowY, 32 * Settings.RenderScale, 8 * Settings.RenderScale); 
             }
             SplashKit.DrawBitmap(_texture, X * 32 * Settings.RenderScale, Y * Settings.RenderScale * 32 - HeightOffset, DOpts);

@@ -23,11 +23,20 @@ namespace CustomProgram
             DOpts = SplashKit.OptionWithBitmapCell(spriteIndex);
             DOpts.ScaleX = Settings.RenderScale;
             DOpts.ScaleY = Settings.RenderScale;
+            DOpts.AnchorOffsetX = 0;
+            DOpts.AnchorOffsetY = 0;
             _texture = texture;
         }
         public virtual void Draw()
         {
-            SplashKit.DrawBitmap(_texture, X * 32 * Settings.RenderScale, (Y * 32 * Settings.RenderScale) - (HeightOffset * Settings.RenderScale), DOpts);
+            if (Settings.ShadowsEnabled)
+            {
+                
+                double shadowX = X * 32 * Settings.RenderScale - ((32 * Settings.RenderScale) - 32) / 2;
+                double shadowY = Y * 32 * Settings.RenderScale - ((32 * Settings.RenderScale) - 32) / 2 + (32 * Settings.RenderScale - 9 * Settings.RenderScale);
+                SplashKit.FillEllipse(Color.RGBAColor(34, 38, 28, 127), shadowX, shadowY, 32 * Settings.RenderScale, 8 * Settings.RenderScale); 
+            }
+            SplashKit.DrawBitmap(_texture, X * 32 * Settings.RenderScale, Y * Settings.RenderScale * 32 - HeightOffset, DOpts);
         }
         public virtual void Update()
         {

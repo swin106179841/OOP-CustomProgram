@@ -1,3 +1,4 @@
+using System.Runtime.Intrinsics.Arm;
 using SplashKitSDK;
 
 namespace CustomProgram
@@ -20,12 +21,20 @@ namespace CustomProgram
             _texture = SplashKit.LoadBitmap("player", "./assets/player.png");
             SplashKit.BitmapSetCellDetails(_texture, 32, 32, 6, 2, 10);
             DOpts = SplashKit.OptionWithBitmapCell(_spriteIndex);
+            DOpts.AnchorOffsetX = 0;
+            DOpts.AnchorOffsetY = 0;
             DOpts.ScaleX = Settings.RenderScale;
             DOpts.ScaleY = Settings.RenderScale;
             _direction = MoveDirection.Down;
         }
         public void Draw()
-        {
+        {   
+            if (Settings.ShadowsEnabled)
+            {
+                double shadowX = X * 32 * Settings.RenderScale - ((32 * Settings.RenderScale) - 32) / 2;
+                double shadowY = Y * 32 * Settings.RenderScale - ((32 * Settings.RenderScale) - 32) / 2 + (32 * Settings.RenderScale - 8 * Settings.RenderScale);
+                SplashKit.FillEllipse(Color.RGBAColor(34, 38, 28, 127), shadowX, shadowY, 32 * Settings.RenderScale, 8 * Settings.RenderScale); 
+            }
             SplashKit.DrawBitmap(_texture, X * 32 * Settings.RenderScale, Y * 32 * Settings.RenderScale, DOpts);
         }
         public void Move(MoveDirection dir)

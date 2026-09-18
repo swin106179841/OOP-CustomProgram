@@ -138,7 +138,9 @@ namespace CustomProgram
                     DrawingOptions cellOpts = SplashKit.OptionWithBitmapCell(_scene[y * _levelWidth + x]);
                     cellOpts.ScaleX = Settings.RenderScale;
                     cellOpts.ScaleY = Settings.RenderScale;
-                    SplashKit.DrawBitmap(_texMan.RequestTexture(0), x * (32 * Settings.RenderScale), y * (32 * Settings.RenderScale), cellOpts);
+                    cellOpts.AnchorOffsetX = 0;
+                    cellOpts.AnchorOffsetY = 0;
+                    SplashKit.DrawBitmap(_texMan.RequestTexture(0), x * 32 * Settings.RenderScale, y * 32 * Settings.RenderScale, cellOpts);
                 }
             }
 

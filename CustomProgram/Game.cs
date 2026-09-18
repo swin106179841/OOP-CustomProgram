@@ -5,15 +5,17 @@ namespace CustomProgram
     class Game
     {
         private String _windowName;
+        private Window _window;
         private String _currentLevel = "./levels/2.lvl";
         public Game() : this("CustomProgram") { }
         public Game(String windowTitle)
         {
             _windowName = windowTitle;
+            _window = SplashKit.OpenWindow(_windowName, 800, 600);
         }
         public void Run()
         {
-            SplashKit.OpenWindow(_windowName, 800, 600);
+            Bitmap background = SplashKit.LoadBitmap("background", "./assets/background.png");
 
             Level myLevel = new Level(_currentLevel);
             Player p1 = new Player(myLevel);
@@ -47,8 +49,8 @@ namespace CustomProgram
                 }
                 p1.Update();
                 myLevel.Update();
-                SplashKit.ClearScreen(Color.Black);
-
+                // SplashKit.ClearScreen(Color.Black);
+                background.Draw(0, 0);
                 myLevel.Draw();
                 p1.Draw();
                 myLevel.DrawObjects();

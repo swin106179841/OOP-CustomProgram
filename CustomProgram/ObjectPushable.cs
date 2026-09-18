@@ -44,16 +44,16 @@ namespace CustomProgram
                 switch (_direction)
                 {
                     case MoveDirection.Up:
-                        Y -= Settings.PlayerMoveSpeed;
+                        Y -= Settings.MoveSpeed;
                         break;
                     case MoveDirection.Down:
-                        Y += Settings.PlayerMoveSpeed;
+                        Y += Settings.MoveSpeed;
                         break;
                     case MoveDirection.Left:
-                        X -= Settings.PlayerMoveSpeed;
+                        X -= Settings.MoveSpeed;
                         break;
                     case MoveDirection.Right:
-                        X += Settings.PlayerMoveSpeed;
+                        X += Settings.MoveSpeed;
                         break;
                 }
 

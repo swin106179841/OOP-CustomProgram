@@ -2,7 +2,7 @@ using SplashKitSDK;
 
 namespace CustomProgram
 {
-    public class Player : IDrawable
+    public class Player : IDrawable, IAnimated
     {
         private float _x;
         private float _y;
@@ -12,12 +12,14 @@ namespace CustomProgram
         public DrawingOptions DOpts;
         private bool _isMoving = false;
         private int _frameCount = 0;
+        private int _animationFrame = 0;
+        private int _spriteIndex = 0;
         public Player(Level level)
         {
             _level = level;
             _texture = SplashKit.LoadBitmap("player", "./assets/player.png");
-            SplashKit.BitmapSetCellDetails(_texture, 32, 32, 4, 1, 4);
-            DOpts = SplashKit.OptionWithBitmapCell(0);
+            SplashKit.BitmapSetCellDetails(_texture, 32, 32, 6, 2, 10);
+            DOpts = SplashKit.OptionWithBitmapCell(_spriteIndex);
             DOpts.ScaleX = Settings.RenderScale;
             DOpts.ScaleY = Settings.RenderScale;
             _direction = MoveDirection.Down;
@@ -80,26 +82,27 @@ namespace CustomProgram
         }
         public void Update()
         {
-            DOpts = SplashKit.OptionWithBitmapCell((int)_direction, DOpts);
+            Animate();
             // update position according to animation
             if (_isMoving)
             {
+                DOpts = SplashKit.OptionWithBitmapCell((int)_direction + 6, DOpts);
                 // 60fps so move for 30 frames
                 // 1 / 30 = 0.0333
                 _frameCount++;
                 switch (_direction)
                 {
                     case MoveDirection.Up:
-                        Y -= Settings.PlayerMoveSpeed;
+                        Y -= Settings.MoveSpeed;
                         break;
                     case MoveDirection.Down:
-                        Y += Settings.PlayerMoveSpeed;
+                        Y += Settings.MoveSpeed;
                         break;
                     case MoveDirection.Left:
-                        X -= Settings.PlayerMoveSpeed;
+                        X -= Settings.MoveSpeed;
                         break;
                     case MoveDirection.Right:
-                        X += Settings.PlayerMoveSpeed;
+                        X += Settings.MoveSpeed;
                         break;
                 }
 
@@ -113,6 +116,20 @@ namespace CustomProgram
             }
         }
         public void SetLevel(Level level) { _level = level; }
+        public void Animate()
+        {
+            // if (!_isMoving)
+            {
+                AnimationFrame++;
+                if (AnimationFrame >= Settings.AnimationTimePerFrame)
+                {
+                    _spriteIndex = (_spriteIndex + 1) % 6;
+                    DOpts = SplashKit.OptionWithBitmapCell(_spriteIndex, DOpts);
+                    AnimationFrame = 0;
+                }
+            }
+        }
+
         public float X { get => _x; set => _x = value; }
         public float Y { get => _y; set => _y = value; }
         public MoveDirection Direction { get => _direction; set => _direction = value; }
@@ -121,5 +138,6 @@ namespace CustomProgram
             get => _texture;
             set => _texture = value;
         }
+        public int AnimationFrame { get => _animationFrame; set => _animationFrame = value; }
     }
 }

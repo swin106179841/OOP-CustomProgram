@@ -7,4 +7,9 @@ namespace CustomProgram
         public void Draw();
         public void Update();
     }
+    interface IAnimated
+    {
+        public int AnimationFrame {get; set;}
+        public void Animate();
+    }
 }

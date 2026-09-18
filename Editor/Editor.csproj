@@ -8,15 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SplashKit" Version="1.3.0" />
+    <ProjectReference Include="..\CustomProgram\CustomProgram.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="assets\**\*">
+    <None Update="../CustomProgram/assets\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Update="levels\**\*">
+    <None Update="../CustomProgram/levels\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

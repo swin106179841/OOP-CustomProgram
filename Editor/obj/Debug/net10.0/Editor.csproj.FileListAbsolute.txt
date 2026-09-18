@@ -1,0 +1,91 @@
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\CustomProgram.deps.json
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\CustomProgram.runtimeconfig.json
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\CustomProgram.exe
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\Editor.exe
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\Editor.deps.json
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\Editor.runtimeconfig.json
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\Editor.dll
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\Editor.pdb
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\SplashKitSDK.dll
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\CustomProgram.dll
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\CustomProgram.pdb
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\obj\Debug\net10.0\Editor.csproj.AssemblyReference.cache
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\obj\Debug\net10.0\Editor.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\obj\Debug\net10.0\Editor.AssemblyInfoInputs.cache
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\obj\Debug\net10.0\Editor.AssemblyInfo.cs
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\obj\Debug\net10.0\Editor.csproj.CoreCompileInputs.cache
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\obj\Debug\net10.0\Editor.sourcelink.json
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\obj\Debug\net10.0\Editor.csproj.Up2Date
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\obj\Debug\net10.0\Editor.dll
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\obj\Debug\net10.0\refint\Editor.dll
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\obj\Debug\net10.0\Editor.pdb
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\obj\Debug\net10.0\Editor.genruntimeconfig.cache
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\obj\Debug\net10.0\ref\Editor.dll
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\background.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\barrel.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\fallback.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\med-tileset.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\mini-tileset.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\player.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\rock.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\PixelArtTopDown-Basic\Extra\TX Plant with Shadow.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\PixelArtTopDown-Basic\Extra\TX Props with Shadow.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\PixelArtTopDown-Basic\source.txt.txt
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\PixelArtTopDown-Basic\TX Plant.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\PixelArtTopDown-Basic\TX Player.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\PixelArtTopDown-Basic\TX Props.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\PixelArtTopDown-Basic\TX Shadow Plant.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\PixelArtTopDown-Basic\TX Shadow.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\PixelArtTopDown-Basic\TX Struct.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\PixelArtTopDown-Basic\TX Tileset Grass.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\PixelArtTopDown-Basic\TX Tileset Stone Ground.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\PixelArtTopDown-Basic\TX Tileset Wall.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\GIFs\Shoom_Hide.gif
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\GIFs\Shoom_Idle.gif
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\GIFs\Shoom_Peek.gif
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\GIFs\Shoom_Pop.gif
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\GIFs\Shoom_Walk.gif
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Hide\Shoom_Hide1.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Hide\Shoom_Hide2.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Hide\Shoom_Hide3.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Hide\Shoom_Hide4.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Hide\Shoom_Hide5.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Hide\Shoom_Hide6.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Hide\Shoom_Hide7.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Hide\Shoom_Hide8.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Idle\Shoom_Idle1.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Idle\Shoom_Idle2.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Idle\Shoom_Idle3.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Idle\Shoom_Idle4.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Idle\Shoom_Idle5.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Idle\Shoom_Idle6.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Idle\Shoom_Idle7.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Idle\Shoom_Idle8.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Peek\Shoom_Peek1.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Peek\Shoom_Peek2.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Peek\Shoom_Peek3.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Peek\Shoom_Peek4.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Peek\Shoom_Peek5.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Peek\Shoom_Peek6.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Peek\Shoom_Peek7.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Peek\Shoom_Peek8.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Pop\Shoom_Pop1.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Pop\Shoom_Pop2.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Pop\Shoom_Pop3.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Pop\Shoom_Pop4.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Walk\Shoom_Walk1.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Walk\Shoom_Walk2.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Walk\Shoom_Walk3.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Walk\Shoom_Walk4.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Walk\Shoom_Walk5.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Walk\Shoom_Walk6.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Walk\Shoom_Walk7.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\PNGs\Shoom_Walk\Shoom_Walk8.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\Sprites\Shoom_Hide.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\Sprites\Shoom_Idle.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\Sprites\Shoom_Peek.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\Sprites\Shoom_Pop.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\assets\testing\Shoom\Sprites\Shoom_Walk.png
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\levels\1.lvl
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\levels\2.lvl
+C:\Users\user\Documents\repos\OOP-CustomProgram\Editor\bin\Debug\net10.0\levels\level template

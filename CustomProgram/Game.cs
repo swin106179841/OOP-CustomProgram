@@ -6,7 +6,7 @@ namespace CustomProgram
     {
         private String _windowName;
         private Window _window;
-        private String _currentLevel = "./levels/2.lvl";
+        private String _currentLevel = "./levels/3.lvl";
         public Game() : this("CustomProgram") { }
         public Game(String windowTitle)
         {
@@ -22,6 +22,7 @@ namespace CustomProgram
             p1.X = 3;
             p1.Y = 4;
 
+            _window.Resize((int)(myLevel.LevelWidth * 32 * Settings.RenderScale), (int)(myLevel.LevelHeight * 32 * Settings.RenderScale));
             while (!SplashKit.WindowCloseRequested(_windowName))
             {
                 SplashKit.ProcessEvents();
@@ -50,7 +51,7 @@ namespace CustomProgram
                 p1.Update();
                 myLevel.Update();
                 // SplashKit.ClearScreen(Color.Black);
-                background.Draw(0, 0);
+                background.Draw(0, 0, SplashKit.OptionScaleBmp(Settings.RenderScale, Settings.RenderScale));
                 myLevel.Draw();
                 p1.Draw();
                 myLevel.DrawObjects();

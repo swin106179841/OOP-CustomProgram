@@ -29,14 +29,18 @@ namespace CustomProgram
         }
         public virtual void Draw()
         {
+            Draw(0, 0);
+        }
+        public virtual void Draw(int offsetX, int offsetY)
+        {
             if (Settings.ShadowsEnabled)
             {
                 
                 double shadowX = X * 32 * Settings.RenderScale - ((32 * Settings.RenderScale) - 32) / 2;
                 double shadowY = Y * 32 * Settings.RenderScale - ((32 * Settings.RenderScale) - 32) / 2 + (32 * Settings.RenderScale - 8 * Settings.RenderScale);
-                SplashKit.FillEllipse(Color.RGBAColor(34, 38, 28, 127), shadowX, shadowY, 32 * Settings.RenderScale, 8 * Settings.RenderScale); 
+                SplashKit.FillEllipse(Color.RGBAColor(34, 38, 28, 127), offsetX + shadowX, offsetY + shadowY, 32 * Settings.RenderScale, 8 * Settings.RenderScale); 
             }
-            SplashKit.DrawBitmap(_texture, X * 32 * Settings.RenderScale, Y * Settings.RenderScale * 32 - HeightOffset, DOpts);
+            SplashKit.DrawBitmap(_texture, offsetX + X * 32 * Settings.RenderScale, offsetY + Y * Settings.RenderScale * 32 - HeightOffset, DOpts);
         }
         public virtual void Update()
         {
@@ -50,6 +54,14 @@ namespace CustomProgram
             TextureIndex = sr.ReadInteger();
             HeightOffset = sr.ReadInteger();
             DOpts = SplashKit.OptionWithBitmapCell(SpriteIndex, DOpts);
+        }
+        public virtual void Save(StreamWriter sw)
+        {
+            sw.WriteLine(X);
+            sw.WriteLine(Y);
+            sw.WriteLine(SpriteIndex);
+            sw.WriteLine(TextureIndex);
+            sw.WriteLine(HeightOffset); // should be 0
         }
         public virtual bool Pushable()
         {

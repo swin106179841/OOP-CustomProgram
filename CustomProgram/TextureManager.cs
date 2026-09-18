@@ -32,5 +32,6 @@ namespace CustomProgram
         {
             _textures.Clear();
         }
+        public int Count => _textures.Count();
     }
 }

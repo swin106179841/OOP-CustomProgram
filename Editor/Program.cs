@@ -1,5 +1,5 @@
 ﻿using SplashKitSDK;
-namespace Editor
+namespace ProgramEditor
 {
     public class Program
     {

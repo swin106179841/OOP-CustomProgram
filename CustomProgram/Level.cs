@@ -1,5 +1,6 @@
 using ShapeDrawer;
 using SplashKitSDK;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 namespace CustomProgram
 {
@@ -9,8 +10,20 @@ namespace CustomProgram
         private int _levelHeight;
         private List<int> _scene = [];
         private List<Object> _objects = [];
-        private List<int> _floorTiles = [22, 23];
+        private List<int> _floorTiles = [13, 14, 22, 23];
         private TextureManager _texMan = new TextureManager();
+
+
+        public Level(int w, int h, Bitmap spriteSheet)
+        {
+            _levelWidth = w;
+            _levelHeight = h;
+            _texMan.AddTexture(spriteSheet);
+            for (int i = 0; i < w * h; i++)
+            {
+                _scene.Add(22);
+            }
+        }
         public Level(String levelPath)
         {
             Load(levelPath);
@@ -105,7 +118,7 @@ namespace CustomProgram
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error loading assets from level: " + levelPath);
+                Console.WriteLine("Error loading tile data from level: " + levelPath);
                 Console.WriteLine("Error: " + e.Message);
                 errorCount++;
             }
@@ -128,28 +141,67 @@ namespace CustomProgram
             _levelWidth = 0;
             _levelHeight = 0;
         }
+        public void Save()
+        {
+            int sum = (_scene[0] << 3) & _scene[_levelHeight * _levelWidth - 1] ^ _scene[(_levelHeight / 2) * (_levelWidth / 2)];
+            String filename = String.Format("./levels/{0}x{1}-{2}.lvl", _levelWidth, _levelHeight, sum);
+            StreamWriter sw = new StreamWriter(filename);
+            sw.WriteLine("LVLV1"); // magic
+            sw.WriteLine(_texMan.RequestTexture(0).Filename); // spritesheet
+            sw.WriteLine("32\n32"); // tile w, tile h
+            sw.WriteLine(6); // tiles accross
+            sw.WriteLine(6); // tiles down
+            sw.WriteLine(36); // tiles total
+            sw.WriteLine(_texMan.Count - 1); // asset count, most likely 0
+            sw.WriteLine(_objects.Count());
+            foreach (GameObject obj in _objects)
+            {
+                sw.WriteLine(obj.GetType());
+                obj.Save(sw);
+            }
+            sw.WriteLine(_levelWidth);
+            sw.WriteLine(_levelHeight);
+            foreach (int tile in _scene)
+            {
+                sw.Write(tile + " ");
+            }
+            sw.WriteLine();
+            sw.Close();
+            Console.WriteLine("Level {0} successfully saved", filename);
+
+        }
         public void Draw()
+        {
+            Draw(0, 0);
+        }
+        public void Draw(int offsetX, int offsetY)
         {
             // draw scene
             for (int y = 0; y < _levelHeight; y++)
             {
                 for (int x = 0; x < _levelWidth; x++)
                 {
-                    DrawingOptions cellOpts = SplashKit.OptionWithBitmapCell(_scene[y * _levelWidth + x]);
-                    cellOpts.ScaleX = Settings.RenderScale;
-                    cellOpts.ScaleY = Settings.RenderScale;
-                    cellOpts.AnchorOffsetX = 0;
-                    cellOpts.AnchorOffsetY = 0;
-                    SplashKit.DrawBitmap(_texMan.RequestTexture(0), x * 32 * Settings.RenderScale, y * 32 * Settings.RenderScale, cellOpts);
+                    if (_scene[y * _levelWidth + x] != -1)
+                    {
+                        DrawingOptions cellOpts = SplashKit.OptionWithBitmapCell(_scene[y * _levelWidth + x]);
+                        cellOpts.ScaleX = Settings.RenderScale;
+                        cellOpts.ScaleY = Settings.RenderScale;
+                        cellOpts.AnchorOffsetX = 0;
+                        cellOpts.AnchorOffsetY = 0;
+                        SplashKit.DrawBitmap(_texMan.RequestTexture(0), offsetX + x * 32 * Settings.RenderScale, offsetY + y * 32 * Settings.RenderScale, cellOpts);
+                    }
                 }
             }
-
         }
         public void DrawObjects()
         {
+            DrawObjects(0, 0);
+        }
+        public void DrawObjects(int offsetX, int offsetY)
+        {
             foreach (GameObject obj in _objects)
             {
-                obj.Draw();
+                obj.Draw(offsetX, offsetY);
             }
         }
         public void Update()
@@ -203,5 +255,17 @@ namespace CustomProgram
             }
             return null;
         }
+        public void RemoveObject(GameObject obj)
+        {
+            _objects.Remove(obj);
+        }
+        public void SetTile(int x, int y, int value)
+        {
+            if (x < 0 || x > _levelWidth || y < 0 || y > _levelHeight)
+                return;
+            _scene[y * _levelWidth + x] = value;
+        }
+        public int LevelWidth { get => _levelWidth; set => _levelWidth = value; }
+        public int LevelHeight { get => _levelHeight; set => _levelHeight = value; }
     }
 }

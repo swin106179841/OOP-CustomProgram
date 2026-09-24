@@ -6,6 +6,6 @@ namespace CustomProgram
     {
         
         public ObjectStatic() : this(0, 0, 0, SplashKit.LoadBitmap("fallback", "./assets/fallback.png")) {}
-        public ObjectStatic(int x, int y, int textureID, Bitmap texture): base(x, y, textureID, texture) {}
+        public ObjectStatic(int x, int y, int spriteIndex, Bitmap texture): base(x, y, spriteIndex, texture) {}
     }
 }

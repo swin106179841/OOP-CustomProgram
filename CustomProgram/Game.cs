@@ -6,7 +6,7 @@ namespace CustomProgram
     {
         private String _windowName;
         private Window _window;
-        private String _currentLevel = "./levels/3.lvl";
+        private String _currentLevel = "./levels/4.lvl";
         public Game() : this("CustomProgram") { }
         public Game(String windowTitle)
         {
@@ -19,8 +19,8 @@ namespace CustomProgram
 
             Level myLevel = new Level(_currentLevel);
             Player p1 = new Player(myLevel);
-            p1.X = 3;
-            p1.Y = 4;
+            p1.X = 5;
+            p1.Y = 6;
 
             _window.Resize((int)(myLevel.LevelWidth * 32 * Settings.RenderScale), (int)(myLevel.LevelHeight * 32 * Settings.RenderScale));
             while (!SplashKit.WindowCloseRequested(_windowName))

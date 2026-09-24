@@ -1,14 +1,14 @@
 using SplashKitSDK;
 namespace CustomProgram
 {
-    class ObjectPushable: GameObject
+    public class ObjectPushable: GameObject
     {
         private int _uid;
         private MoveDirection _direction;
         private bool _isMoving;
         private int _frameCount = 0;
         public ObjectPushable(): this(0, 0, 0, SplashKit.LoadBitmap("fallback", "./assets/fallback.png")) {}
-        public ObjectPushable(int x, int y, int textureID, Bitmap texture): base(x, y, textureID, texture)
+        public ObjectPushable(int x, int y, int spriteIndex, Bitmap texture): base(x, y, spriteIndex, texture)
         {
             _uid = ObjectIDs.NewID();
         }

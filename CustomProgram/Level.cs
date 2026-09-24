@@ -84,10 +84,10 @@ namespace CustomProgram
                     GameObject obj;
                     switch (objType)
                     {
-                        case "ObjectStatic":
+                        case "CustomProgram.ObjectStatic":
                             obj = new ObjectStatic();
                             break;
-                        case "ObjectPushable":
+                        case "CustomProgram.ObjectPushable":
                             obj = new ObjectPushable();
                             break;
                         default:
@@ -165,7 +165,6 @@ namespace CustomProgram
             {
                 sw.Write(tile + " ");
             }
-            sw.WriteLine();
             sw.Close();
             Console.WriteLine("Level {0} successfully saved", filename);
 
@@ -259,6 +258,10 @@ namespace CustomProgram
         {
             _objects.Remove(obj);
         }
+        public void AddObject(GameObject obj)
+        {
+            _objects.Add(obj);
+        }
         public void SetTile(int x, int y, int value)
         {
             if (x < 0 || x > _levelWidth || y < 0 || y > _levelHeight)
@@ -267,5 +270,6 @@ namespace CustomProgram
         }
         public int LevelWidth { get => _levelWidth; set => _levelWidth = value; }
         public int LevelHeight { get => _levelHeight; set => _levelHeight = value; }
+        public TextureManager Textures => _texMan;
     }
 }

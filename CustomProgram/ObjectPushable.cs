@@ -1,16 +1,18 @@
 using SplashKitSDK;
 namespace CustomProgram
 {
-    public class ObjectPushable: GameObject
+    public class ObjectPushable : GameObject
     {
         private int _uid;
         private MoveDirection _direction;
         private bool _isMoving;
         private int _frameCount = 0;
-        public ObjectPushable(): this(0, 0, 0, SplashKit.LoadBitmap("fallback", "./assets/fallback.png")) {}
-        public ObjectPushable(int x, int y, int spriteIndex, Bitmap texture): base(x, y, spriteIndex, texture)
+        private PushableTypes _type;
+        public ObjectPushable() : this(0, 0, 0, SplashKit.LoadBitmap("fallback", "./assets/fallback.png")) { }
+        public ObjectPushable(int x, int y, int spriteIndex, Bitmap texture) : base(x, y, spriteIndex, texture)
         {
             _uid = ObjectIDs.NewID();
+            _type = PushableTypes.Barrel;
         }
         public virtual void Move(MoveDirection dir)
         {
@@ -66,5 +68,20 @@ namespace CustomProgram
                 }
             }
         }
+        public override void Load(StreamReader sr)
+        {
+            base.Load(sr);
+            if (SpriteIndex == 33)
+            {
+                // if stone override barrel type
+                _type = PushableTypes.Stone;
+            }
+        }
+        public PushableTypes Type
+        {
+            get => _type;
+            set => _type = value;
+        }
+        public bool IsMoving => _isMoving;
     }
 }

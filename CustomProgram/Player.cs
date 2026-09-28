@@ -28,12 +28,12 @@ namespace CustomProgram
             _direction = MoveDirection.Down;
         }
         public void Draw()
-        {   
+        {
             if (Settings.ShadowsEnabled)
             {
                 double shadowX = X * 32 * Settings.RenderScale - ((32 * Settings.RenderScale) - 32) / 2;
                 double shadowY = Y * 32 * Settings.RenderScale - ((32 * Settings.RenderScale) - 32) / 2 + (32 * Settings.RenderScale - 8 * Settings.RenderScale);
-                SplashKit.FillEllipse(Color.RGBAColor(34, 38, 28, 127), shadowX, shadowY, 32 * Settings.RenderScale, 8 * Settings.RenderScale); 
+                SplashKit.FillEllipse(Color.RGBAColor(34, 38, 28, 127), shadowX, shadowY, 32 * Settings.RenderScale, 8 * Settings.RenderScale);
             }
             SplashKit.DrawBitmap(_texture, X * 32 * Settings.RenderScale, Y * 32 * Settings.RenderScale, DOpts);
         }
@@ -81,7 +81,7 @@ namespace CustomProgram
                     {
                         _isMoving = true;
                     }
-                    else if (obj is ObjectPushable pushable && _level.IsFloor(followingTile) && followingObj == null)
+                    else if (obj is ObjectPushable pushable && (_level.IsFloor(followingTile) || (_level.IsSpecial(followingTile) && (obj as ObjectPushable)?.Type == PushableTypes.Stone)) && followingObj == null)
                     {
                         _isMoving = true;
                         pushable.Move(dir);

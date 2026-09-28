@@ -26,6 +26,8 @@ namespace CustomProgram
             while (!SplashKit.WindowCloseRequested(_windowName))
             {
                 SplashKit.ProcessEvents();
+                // check objects
+                myLevel.CheckObjects();
                 // player input
                 if (SplashKit.KeyDown(KeyCode.WKey))
                 {

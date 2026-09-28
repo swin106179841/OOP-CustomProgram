@@ -10,7 +10,8 @@ namespace CustomProgram
         private int _levelHeight;
         private List<int> _scene = [];
         private List<Object> _objects = [];
-        private List<int> _floorTiles = [13, 14, 22, 23];
+        private List<int> _floorTiles = [13, 14, 22, 23, 35];
+        private List<int> _specialTiles = [34];
         private TextureManager _texMan = new TextureManager();
 
 
@@ -243,6 +244,15 @@ namespace CustomProgram
             }
             return false;
         }
+        public bool IsSpecial(int tile)
+        {
+            foreach (int t in _specialTiles)
+            {
+                if (tile == t)
+                    return true;
+            }
+            return false;
+        }
         public GameObject? ObjectAt(int x, int y)
         {
             foreach (GameObject obj in _objects)
@@ -267,6 +277,25 @@ namespace CustomProgram
             if (x < 0 || x > _levelWidth || y < 0 || y > _levelHeight)
                 return;
             _scene[y * _levelWidth + x] = value;
+        }
+        // check objects for special interactions
+        public void CheckObjects()
+        {
+            foreach (GameObject obj in _objects)
+            {
+                if ((obj as ObjectPushable)?.Type == PushableTypes.Stone && (obj as ObjectPushable)?.IsMoving == false)
+                {
+                    if (TileAt(obj.X, obj.Y) == 34)
+                    {
+                        // push stone into hole
+                        // change spriteindex
+                        SetTile((int)obj.X, (int)obj.Y, 35);
+                        // delete obj
+                        _objects.Remove(obj);
+                        return;
+                    }
+                }
+            }
         }
         public int LevelWidth { get => _levelWidth; set => _levelWidth = value; }
         public int LevelHeight { get => _levelHeight; set => _levelHeight = value; }

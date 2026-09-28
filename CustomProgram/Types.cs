@@ -7,4 +7,9 @@ namespace CustomProgram
         Left = 2,
         Right = 3
     }
+    public enum PushableTypes
+    {
+        Barrel,
+        Stone
+    }
 }

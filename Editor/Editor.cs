@@ -23,7 +23,7 @@ namespace ProgramEditor
         {
             Bitmap background = SplashKit.LoadBitmap("background", "./assets/background.png");
 
-            Bitmap spriteSheet = SplashKit.LoadBitmap("spriteSheet", "./assets/med-tileset.png");
+            Bitmap spriteSheet = SplashKit.LoadBitmap("spriteSheet", "./assets/cus-tileset.png");
             SplashKit.BitmapSetCellDetails(spriteSheet, 32, 32, 6, 6, 36);
 
             Level myLevel = new Level(15, 10, spriteSheet);
@@ -103,22 +103,22 @@ namespace ProgramEditor
                         case 30:
                             GameObject rock = new ObjectStatic(x, y, 30, lvl.Textures.RequestTexture(0));
                             lvl.AddObject(rock);
-                            lvl.SetTile(x, y, 13);
+                            lvl.SetTile(x, y, lvl.FirstFloor);
                             break;
                         case 31:
                             GameObject barrel = new ObjectPushable(x, y, 31, lvl.Textures.RequestTexture(0));
                             lvl.AddObject(barrel);
-                            lvl.SetTile(x, y, 13);
+                            lvl.SetTile(x, y, lvl.FirstFloor);
                             break;
                         case 32:
                             GameObject bush = new ObjectStatic(x, y, 32, lvl.Textures.RequestTexture(0));
                             lvl.AddObject(bush);
-                            lvl.SetTile(x, y, 13);
+                            lvl.SetTile(x, y, lvl.FirstFloor);
                             break;
                         case 33:
                             GameObject stone = new ObjectPushable(x, y, 33, lvl.Textures.RequestTexture(0));
                             lvl.AddObject(stone);
-                            lvl.SetTile(x, y, 13);
+                            lvl.SetTile(x, y, lvl.FirstFloor);
                             break;
                     }
                 }

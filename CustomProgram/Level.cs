@@ -10,7 +10,7 @@ namespace CustomProgram
         private int _levelHeight;
         private List<int> _scene = [];
         private List<Object> _objects = [];
-        private List<int> _floorTiles = [13, 14, 22, 23, 35];
+        private List<int> _floorTiles = [7, 10, 35];
         private List<int> _specialTiles = [34];
         private TextureManager _texMan = new TextureManager();
 
@@ -22,7 +22,7 @@ namespace CustomProgram
             _texMan.AddTexture(spriteSheet);
             for (int i = 0; i < w * h; i++)
             {
-                _scene.Add(22);
+                _scene.Add(_floorTiles[0]);
             }
         }
         public Level(String levelPath)
@@ -300,5 +300,6 @@ namespace CustomProgram
         public int LevelWidth { get => _levelWidth; set => _levelWidth = value; }
         public int LevelHeight { get => _levelHeight; set => _levelHeight = value; }
         public TextureManager Textures => _texMan;
+        public int FirstFloor => _floorTiles[0];
     }
 }

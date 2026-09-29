@@ -36,7 +36,7 @@ namespace CustomProgram
             int errorCount = 0;
             StreamReader sr = File.OpenText(levelPath);
             // magic number
-            if (sr.ReadLine() != "LVLV1")
+            if (sr.ReadLine() != "LVLV2")
             {
                 Console.WriteLine("Error. Invalid File Type");
                 return;
@@ -57,6 +57,25 @@ namespace CustomProgram
             {
                 Console.WriteLine("Error loading spritesheet from level: " + levelPath);
                 Console.WriteLine("Error: " + e.Message);
+            }
+            // load floor and special tiles
+            try
+            {
+                int floorTileCount = sr.ReadInteger();
+                for (int i = 0; i < floorTileCount; i++)
+                {
+                    _floorTiles.Add(sr.ReadInteger());
+                }
+                int specialTileCount = sr.ReadInteger();
+                for (int i = 0; i < specialTileCount; i++)
+                {
+                    _specialTiles.Add(sr.ReadInteger());
+                }
+            } catch (Exception e)
+            {
+                Console.WriteLine("Error loading floor/special tile info from level: " + levelPath);
+                Console.WriteLine("Error: " + e.Message);
+                errorCount++;
             }
             // load assets
             try
@@ -141,6 +160,8 @@ namespace CustomProgram
             _texMan.RemoveAllTextures();
             _levelWidth = 0;
             _levelHeight = 0;
+            _floorTiles.Clear();
+            _specialTiles.Clear();
         }
         public void Save()
         {
@@ -153,6 +174,16 @@ namespace CustomProgram
             sw.WriteLine(6); // tiles accross
             sw.WriteLine(6); // tiles down
             sw.WriteLine(36); // tiles total
+            sw.WriteLine(_floorTiles.Count); // how many floor tiles (walkable)
+            foreach (int floorTile in _floorTiles)
+            {
+                sw.WriteLine(floorTile); // walkable tile value
+            }
+            sw.WriteLine(_specialTiles.Count); // special tile count
+            foreach (int specTile in _specialTiles)
+            {
+                sw.WriteLine(specTile);
+            }
             sw.WriteLine(_texMan.Count - 1); // asset count, most likely 0
             sw.WriteLine(_objects.Count());
             foreach (GameObject obj in _objects)

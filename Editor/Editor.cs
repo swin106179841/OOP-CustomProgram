@@ -7,7 +7,7 @@ namespace ProgramEditor
     {
         private String _windowName;
         private Window _window;
-        private String _currentLevel = "./levels/2.lvl";
+        private String? _currentLevel = "./levels/5.lvl";
         private int _mapOffsetX = 200;
         private int _selectedSprite = 0;
         public Editor() : this("CustomProgram Editor") { }
@@ -27,6 +27,11 @@ namespace ProgramEditor
             SplashKit.BitmapSetCellDetails(spriteSheet, 32, 32, 6, 6, 36);
 
             Level myLevel = new Level(15, 10, spriteSheet);
+
+            if (_currentLevel != null)
+            {
+                myLevel.Load(_currentLevel);
+            }
 
             // update window width to fit level
             SplashKit.ProcessEvents();
@@ -94,12 +99,18 @@ namespace ProgramEditor
             // barrel = 31
             // bush = 32
             // stone = 33
+            // coin = 20
             for (int y = 0; y < lvl.LevelHeight; y++)
             {
                 for (int x = 0; x < lvl.LevelWidth; x++)
                 {
                     switch (lvl.TileAt(x, y))
                     {
+                        case 20:
+                            GameObject coin = new ObjectCollectable(x, y, 20, lvl.Textures.RequestTexture(0));
+                            lvl.AddObject(coin);
+                            lvl.SetTile(x, y, lvl.FirstFloor);
+                            break;
                         case 30:
                             GameObject rock = new ObjectStatic(x, y, 30, lvl.Textures.RequestTexture(0));
                             lvl.AddObject(rock);

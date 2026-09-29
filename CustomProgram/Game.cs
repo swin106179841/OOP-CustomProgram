@@ -6,7 +6,7 @@ namespace CustomProgram
     {
         private String _windowName;
         private Window _window;
-        private String _currentLevel = "./levels/5.lvl";
+        private String _currentLevel = "./levels/6.lvl";
         public Game() : this("CustomProgram") { }
         public Game(String windowTitle)
         {
@@ -27,7 +27,7 @@ namespace CustomProgram
             {
                 SplashKit.ProcessEvents();
                 // check objects
-                myLevel.CheckObjects();
+                myLevel.CheckObjects(p1);
                 // player input
                 if (SplashKit.KeyDown(KeyCode.WKey))
                 {

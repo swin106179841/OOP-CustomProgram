@@ -2,6 +2,7 @@ using ShapeDrawer;
 using SplashKitSDK;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Runtime.InteropServices;
 namespace CustomProgram
 {
     public class Level
@@ -10,8 +11,12 @@ namespace CustomProgram
         private int _levelHeight;
         private List<int> _scene = [];
         private List<Object> _objects = [];
-        private List<int> _floorTiles = [7, 10, 35];
+        private List<int> _floorTiles = [7, 10, 35, 19, 25];
         private List<int> _specialTiles = [34];
+        private List<int> _doorTiles = [18, 24];
+        private List<int> _exitTiles = [19, 25];
+        private int _goalsCollected = 0;
+        private int _goalsNeeded = 0;
         private TextureManager _texMan = new TextureManager();
 
 
@@ -71,6 +76,17 @@ namespace CustomProgram
                 {
                     _specialTiles.Add(sr.ReadInteger());
                 }
+                _goalsNeeded = sr.ReadInteger();
+                int doorTileCount = sr.ReadInteger();
+                for (int i = 0; i < doorTileCount; i++)
+                {
+                    _doorTiles.Add(sr.ReadInteger());
+                }
+                int exitTileCount = sr.ReadInteger();
+                for (int i = 0; i < exitTileCount; i++)
+                {
+                    _exitTiles.Add(sr.ReadInteger());
+                }
             } catch (Exception e)
             {
                 Console.WriteLine("Error loading floor/special tile info from level: " + levelPath);
@@ -109,6 +125,9 @@ namespace CustomProgram
                             break;
                         case "CustomProgram.ObjectPushable":
                             obj = new ObjectPushable();
+                            break;
+                        case "CustomProgram.ObjectCollectable":
+                            obj = new ObjectCollectable();
                             break;
                         default:
                             throw new InvalidDataException();
@@ -162,13 +181,16 @@ namespace CustomProgram
             _levelHeight = 0;
             _floorTiles.Clear();
             _specialTiles.Clear();
+            _goalsCollected = 0;
+            _doorTiles.Clear();
+            _exitTiles.Clear();
         }
         public void Save()
         {
             int sum = (_scene[0] << 3) & _scene[_levelHeight * _levelWidth - 1] ^ _scene[(_levelHeight / 2) * (_levelWidth / 2)];
             String filename = String.Format("./levels/{0}x{1}-{2}.lvl", _levelWidth, _levelHeight, sum);
             StreamWriter sw = new StreamWriter(filename);
-            sw.WriteLine("LVLV1"); // magic
+            sw.WriteLine("LVLV2"); // magic
             sw.WriteLine(_texMan.RequestTexture(0).Filename); // spritesheet
             sw.WriteLine("32\n32"); // tile w, tile h
             sw.WriteLine(6); // tiles accross
@@ -183,6 +205,17 @@ namespace CustomProgram
             foreach (int specTile in _specialTiles)
             {
                 sw.WriteLine(specTile);
+            }
+            sw.WriteLine(_goalsNeeded); // required collectables
+            sw.WriteLine(_doorTiles.Count); // door tiles
+            foreach (int doorTile in _doorTiles)
+            {
+                sw.WriteLine(doorTile);
+            }
+            sw.WriteLine(_exitTiles.Count); // exit tiles
+            foreach (int exitTile in _exitTiles)
+            {
+                sw.WriteLine(exitTile);
             }
             sw.WriteLine(_texMan.Count - 1); // asset count, most likely 0
             sw.WriteLine(_objects.Count());
@@ -284,7 +317,27 @@ namespace CustomProgram
             }
             return false;
         }
+        // use for collisions
         public GameObject? ObjectAt(int x, int y)
+        {
+            foreach (GameObject obj in _objects)
+            {
+                if (obj.X == x && obj.Y == y)
+                {
+                    if ((obj as ObjectCollectable) != null)
+                    {
+                        return null; // dont collide collectables
+                    }
+                    else
+                    {
+                        return obj;
+                    }
+                }
+            }
+            return null;
+        }
+        // use for data
+        public GameObject? AnyObjectAt(int x, int y)
         {
             foreach (GameObject obj in _objects)
             {
@@ -310,7 +363,7 @@ namespace CustomProgram
             _scene[y * _levelWidth + x] = value;
         }
         // check objects for special interactions
-        public void CheckObjects()
+        public void CheckObjects(Player player)
         {
             foreach (GameObject obj in _objects)
             {
@@ -324,6 +377,16 @@ namespace CustomProgram
                         // delete obj
                         _objects.Remove(obj);
                         return;
+                    }
+                    else if ((obj as ObjectPushable)?.X == player.X && (obj as ObjectPushable)?.Y == player.Y)
+                    {
+                        // collect coin (goal)
+                        GameObject? goal = AnyObjectAt((int)player.X, (int)player.Y);
+                        if (goal != null)
+                        {
+                            RemoveObject(goal);
+                            _goalsCollected++;
+                        }
                     }
                 }
             }

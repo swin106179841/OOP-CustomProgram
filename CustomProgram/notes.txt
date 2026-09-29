@@ -42,4 +42,5 @@ for object collision
     update obj pos like player
 
 TO INVESTIGATE: remove hard coded floor values and load from level
-    
+
+update level format to include player start, floor tiles, stone, hole, coin, door, etc

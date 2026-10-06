@@ -7,7 +7,7 @@ namespace CustomProgram
         private String _windowName;
         private Window _window;
         private String _currentLevel = "./levels/6.lvl";
-        public Game() : this("CustomProgram") { }
+        public Game() : this("Temple of Fortune") { }
         public Game(String windowTitle)
         {
             _windowName = windowTitle;

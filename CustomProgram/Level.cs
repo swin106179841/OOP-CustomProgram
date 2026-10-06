@@ -378,7 +378,7 @@ namespace CustomProgram
                         _objects.Remove(obj);
                         return;
                     }
-                    else if ((obj as ObjectPushable)?.X == player.X && (obj as ObjectPushable)?.Y == player.Y)
+                    else if ((obj as ObjectCollectable)?.X == player.X && (obj as ObjectCollectable)?.Y == player.Y)
                     {
                         // collect coin (goal)
                         GameObject? goal = AnyObjectAt((int)player.X, (int)player.Y);

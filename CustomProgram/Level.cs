@@ -271,6 +271,7 @@ namespace CustomProgram
         }
         public void Update()
         {
+            // update game objects 
             foreach (GameObject obj in _objects)
             {
                 obj.Update();
@@ -388,8 +389,29 @@ namespace CustomProgram
                     GameObject? goal = AnyObjectAt((int)player.X, (int)player.Y);
                     if (goal != null)
                     {
+                        // there has been collision with collectable 
                         _objects.Remove(obj);
                         _goalsCollected++;
+                        // check if door can be opened
+                        CheckDoor();
+                    }
+                }
+            }
+        }
+        public void CheckDoor()
+        {
+            if (_goalsCollected >= _goalsNeeded)
+            {
+                for (int i = 0; i < _scene.Count(); i++)
+                {
+                    int tile = _scene[i];
+                    foreach (int dtile in _doorTiles)
+                    {
+                        if (tile == dtile)
+                        {
+                            tile++;
+                            _scene[i] = tile;
+                        }
                     }
                 }
             }

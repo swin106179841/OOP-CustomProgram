@@ -416,6 +416,15 @@ namespace CustomProgram
                 }
             }
         }
+        public GameState CheckWin(Player player)
+        {
+            foreach (int tile in _exitTiles)
+            {
+                if (TileAt(player.X, player.Y) == tile)
+                    return GameState.Win;
+            }
+            return GameState.Playing;
+        }
         public int LevelWidth { get => _levelWidth; set => _levelWidth = value; }
         public int LevelHeight { get => _levelHeight; set => _levelHeight = value; }
         public TextureManager Textures => _texMan;

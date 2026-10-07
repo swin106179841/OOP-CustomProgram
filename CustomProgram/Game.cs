@@ -7,14 +7,19 @@ namespace CustomProgram
         private String _windowName;
         private Window _window;
         private String _currentLevel = "./levels/6.lvl";
+        private GameState _gameState;
+        private Bitmap _winScr;
+        private int _winScrFrameCount;
         public Game() : this("Temple of Fortune") { }
         public Game(String windowTitle)
         {
             _windowName = windowTitle;
             _window = SplashKit.OpenWindow(_windowName, 800, 600);
+            _winScr = SplashKit.LoadBitmap("win", "./assets/win.png");
         }
         public void Run()
         {
+            _gameState = GameState.Playing;
             Bitmap background = SplashKit.LoadBitmap("background", "./assets/background.png");
 
             Level myLevel = new Level(_currentLevel);
@@ -26,38 +31,55 @@ namespace CustomProgram
             while (!SplashKit.WindowCloseRequested(_windowName))
             {
                 SplashKit.ProcessEvents();
-                // check objects
-                myLevel.CheckObjects(p1);
-                // player input
-                if (SplashKit.KeyDown(KeyCode.WKey))
+
+                // While Playing 
+                // ---------------------------------------------------------------
+                if (_gameState == GameState.Playing)
                 {
-                    p1.Move(MoveDirection.Up);
-                }
-                else if (SplashKit.KeyDown(KeyCode.SKey))
+                    // check objects
+                    myLevel.CheckObjects(p1);
+                    // player input
+                    if (SplashKit.KeyDown(KeyCode.WKey))
+                    {
+                        p1.Move(MoveDirection.Up);
+                    }
+                    else if (SplashKit.KeyDown(KeyCode.SKey))
+                    {
+                        p1.Move(MoveDirection.Down);
+                    }
+                    else if (SplashKit.KeyDown(KeyCode.AKey))
+                    {
+                        p1.Move(MoveDirection.Left);
+                    }
+                    else if (SplashKit.KeyDown(KeyCode.DKey))
+                    {
+                        p1.Move(MoveDirection.Right);
+                    }
+                    // debug keybinds
+                    if (SplashKit.KeyTyped(KeyCode.RKey))
+                    {
+                        myLevel.Load(_currentLevel);
+                    }
+                    p1.Update();
+                    myLevel.Update();
+                    // SplashKit.ClearScreen(Color.Black);
+                    background.Draw(0, 0, SplashKit.OptionScaleBmp(Settings.RenderScale, Settings.RenderScale));
+                    myLevel.Draw();
+                    p1.Draw();
+                    myLevel.DrawObjects();
+                    // check game win to update game state
+                    _gameState = myLevel.CheckWin(p1);
+                } else if (_gameState == GameState.Win)
                 {
-                    p1.Move(MoveDirection.Down);
+                    background.Draw(0, 0, SplashKit.OptionScaleBmp(Settings.RenderScale, Settings.RenderScale));
+                    _winScr.Draw(_window.Width / 2 - (_winScr.Width / 2), _window.Height / 2 - (_winScr.Height / 2));
+                    _winScrFrameCount++;
+
+                    // wait for 3 seconds (3sec * 60frames = 180frames)
+                    if (_winScrFrameCount == 180)
+                        _gameState = GameState.Menu;
+
                 }
-                else if (SplashKit.KeyDown(KeyCode.AKey))
-                {
-                    p1.Move(MoveDirection.Left);
-                }
-                else if (SplashKit.KeyDown(KeyCode.DKey))
-                {
-                    p1.Move(MoveDirection.Right);
-                }
-                // debug keybinds
-                if (SplashKit.KeyTyped(KeyCode.RKey))
-                {
-                    myLevel.Load(_currentLevel);
-                }
-                p1.Update();
-                myLevel.Update();
-                // SplashKit.ClearScreen(Color.Black);
-                background.Draw(0, 0, SplashKit.OptionScaleBmp(Settings.RenderScale, Settings.RenderScale));
-                myLevel.Draw();
-                p1.Draw();
-                myLevel.DrawObjects();
-                // draw scaled buffer
                 SplashKit.RefreshScreen(60);
             }
             SplashKit.CloseAllWindows();

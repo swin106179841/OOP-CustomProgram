@@ -12,4 +12,10 @@ namespace CustomProgram
         Barrel,
         Stone
     }
+    public enum GameState
+    {
+        Menu,
+        Playing,
+        Win
+    }
 }

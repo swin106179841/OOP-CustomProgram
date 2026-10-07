@@ -10,7 +10,7 @@ namespace CustomProgram
         private int _levelWidth;
         private int _levelHeight;
         private List<int> _scene = [];
-        private List<Object> _objects = [];
+        private List<GameObject> _objects = [];
         private List<int> _floorTiles = [7, 10, 35, 19, 25];
         private List<int> _specialTiles = [34];
         private List<int> _doorTiles = [18, 24];
@@ -87,7 +87,8 @@ namespace CustomProgram
                 {
                     _exitTiles.Add(sr.ReadInteger());
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine("Error loading floor/special tile info from level: " + levelPath);
                 Console.WriteLine("Error: " + e.Message);
@@ -365,8 +366,10 @@ namespace CustomProgram
         // check objects for special interactions
         public void CheckObjects(Player player)
         {
-            foreach (GameObject obj in _objects)
+            // iterate backwards to avoid shifting order before loop finishes
+            for (int i = _objects.Count()-1; i >= 0; i--)
             {
+                GameObject obj = _objects[i];
                 if ((obj as ObjectPushable)?.Type == PushableTypes.Stone && (obj as ObjectPushable)?.IsMoving == false)
                 {
                     if (TileAt(obj.X, obj.Y) == 34)
@@ -378,15 +381,15 @@ namespace CustomProgram
                         _objects.Remove(obj);
                         return;
                     }
-                    else if ((obj as ObjectCollectable)?.X == player.X && (obj as ObjectCollectable)?.Y == player.Y)
+                }
+                else if ((obj as ObjectCollectable)?.X == player.X && (obj as ObjectCollectable)?.Y == player.Y)
+                {
+                    // collect coin (goal)
+                    GameObject? goal = AnyObjectAt((int)player.X, (int)player.Y);
+                    if (goal != null)
                     {
-                        // collect coin (goal)
-                        GameObject? goal = AnyObjectAt((int)player.X, (int)player.Y);
-                        if (goal != null)
-                        {
-                            RemoveObject(goal);
-                            _goalsCollected++;
-                        }
+                        _objects.Remove(obj);
+                        _goalsCollected++;
                     }
                 }
             }

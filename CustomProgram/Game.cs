@@ -31,7 +31,8 @@ namespace CustomProgram
             while (!SplashKit.WindowCloseRequested(_windowName))
             {
                 SplashKit.ProcessEvents();
-
+                // clear screen with background
+                background.Draw(0, 0, SplashKit.OptionScaleBmp(Settings.RenderScale, Settings.RenderScale));
                 // While Playing 
                 // ---------------------------------------------------------------
                 if (_gameState == GameState.Playing)
@@ -63,7 +64,6 @@ namespace CustomProgram
                     p1.Update();
                     myLevel.Update();
                     // SplashKit.ClearScreen(Color.Black);
-                    background.Draw(0, 0, SplashKit.OptionScaleBmp(Settings.RenderScale, Settings.RenderScale));
                     myLevel.Draw();
                     p1.Draw();
                     myLevel.DrawObjects();
@@ -71,7 +71,6 @@ namespace CustomProgram
                     _gameState = myLevel.CheckWin(p1);
                 } else if (_gameState == GameState.Win)
                 {
-                    background.Draw(0, 0, SplashKit.OptionScaleBmp(Settings.RenderScale, Settings.RenderScale));
                     _winScr.Draw(_window.Width / 2 - (_winScr.Width / 2), _window.Height / 2 - (_winScr.Height / 2));
                     _winScrFrameCount++;
 

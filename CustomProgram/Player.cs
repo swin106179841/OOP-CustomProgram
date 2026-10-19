@@ -138,6 +138,13 @@ namespace CustomProgram
                 }
             }
         }
+        public void Reset()
+        {
+            _isMoving = false;
+            _frameCount = 0;
+            _animationFrame = 0;
+            _spriteIndex = 0;
+        }
 
         public float X { get => _x; set => _x = value; }
         public float Y { get => _y; set => _y = value; }

@@ -1,0 +1,15 @@
+2
+LevelButton
+Level 1
+100
+50
+100
+20
+./levels/1.lvl
+LevelButton
+Level 2
+100
+100
+100
+20
+./levels/2.lvl

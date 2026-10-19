@@ -7,7 +7,7 @@ namespace ProgramEditor
     {
         private String _windowName;
         private Window _window;
-        private String? _currentLevel = "./levels/5.lvl";
+        private String? _currentLevel = null;
         private int _mapOffsetX = 200;
         private int _selectedSprite = 0;
         public Editor() : this("CustomProgram Editor") { }

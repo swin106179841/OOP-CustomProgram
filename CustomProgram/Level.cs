@@ -17,6 +17,8 @@ namespace CustomProgram
         private List<int> _exitTiles = [19, 25];
         private int _goalsCollected = 0;
         private int _goalsNeeded = 0;
+        private int _playerX = 2;
+        private int _playerY = 2;
         private TextureManager _texMan = new TextureManager();
 
 
@@ -46,6 +48,9 @@ namespace CustomProgram
                 Console.WriteLine("Error. Invalid File Type");
                 return;
             }
+            // load player start pos
+            _playerX = sr.ReadInteger();
+            _playerY = sr.ReadInteger();
             // load sprite sheet
             try
             {
@@ -186,12 +191,19 @@ namespace CustomProgram
             _doorTiles.Clear();
             _exitTiles.Clear();
         }
+        public void LoadNew(string levelPath)
+        {
+            Clear();
+            Load(levelPath);
+        }
         public void Save()
         {
             int sum = (_scene[0] << 3) & _scene[_levelHeight * _levelWidth - 1] ^ _scene[(_levelHeight / 2) * (_levelWidth / 2)];
             String filename = String.Format("./levels/{0}x{1}-{2}.lvl", _levelWidth, _levelHeight, sum);
             StreamWriter sw = new StreamWriter(filename);
             sw.WriteLine("LVLV2"); // magic
+            sw.WriteLine(_playerX);
+            sw.WriteLine(_playerY);
             sw.WriteLine(_texMan.RequestTexture(0).Filename); // spritesheet
             sw.WriteLine("32\n32"); // tile w, tile h
             sw.WriteLine(6); // tiles accross
@@ -429,5 +441,7 @@ namespace CustomProgram
         public int LevelHeight { get => _levelHeight; set => _levelHeight = value; }
         public TextureManager Textures => _texMan;
         public int FirstFloor => _floorTiles[0];
+        public int PlayerX => _playerX;
+        public int PlayerY => _playerY;
     }
 }

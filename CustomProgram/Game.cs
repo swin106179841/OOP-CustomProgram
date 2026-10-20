@@ -81,8 +81,10 @@ namespace CustomProgram
                     _winScrFrameCount++;
 
                     // wait for 3 seconds (3sec * 60frames = 180frames)
-                    if (_winScrFrameCount == 180)
+                    if (_winScrFrameCount >= 180) {
                         _gameState = GameState.Menu;
+                        _winScrFrameCount = 0;
+                    }
 
                 } else
                 {

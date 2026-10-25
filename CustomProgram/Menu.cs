@@ -135,7 +135,6 @@ namespace CustomProgram
 
             if (SplashKit.MouseClicked(MouseButton.LeftButton))
             {
-                Console.WriteLine("clicked on menu at {0} {1}", (int)SplashKit.MouseX(), (int)SplashKit.MouseY());
                 SelectItem((int)SplashKit.MouseX(), (int)SplashKit.MouseY());
             }
 
@@ -149,12 +148,10 @@ namespace CustomProgram
         }
         private void SelectItem(int x, int y)
         {
-            Console.WriteLine("selecting item");
             foreach (IMenuItem itm in _widgets)
             {
                 if (x > itm.X && x <= itm.W + itm.X && y > itm.Y && y < itm.Y + itm.H)
                 {
-                    Console.WriteLine("item selected");
                     _selected = itm as LevelButton;
 
                 }

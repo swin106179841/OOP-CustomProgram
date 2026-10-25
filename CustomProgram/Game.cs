@@ -71,8 +71,8 @@ namespace CustomProgram
                     myLevel.Update();
                     // SplashKit.ClearScreen(Color.Black);
                     myLevel.Draw();
-                    p1.Draw();
                     myLevel.DrawObjects();
+                    p1.Draw();
                     // check game win to update game state
                     _gameState = myLevel.CheckWin(p1);
                 } else if (_gameState == GameState.Win)

@@ -1,15 +1,21 @@
-2
+3
 LevelButton
 Level 1
 100
-50
+350
 100
 20
 ./levels/1.lvl
 LevelButton
 Level 2
 100
-100
+400
 100
 20
 ./levels/2.lvl
+MenuImage
+./assets/hero.png
+0
+0
+1
+1

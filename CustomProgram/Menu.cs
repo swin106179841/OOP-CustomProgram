@@ -86,6 +86,27 @@ namespace CustomProgram
         public int H { get => _h; set => _h = value; }
 
     }
+    public class MenuImage: MenuLabel
+    {
+        private Bitmap _img;
+        public MenuImage(): base("fallback", 0, 0)
+        {
+            _img = SplashKit.LoadBitmap("fallback", "./assets/fallback.png");
+        }
+        public MenuImage(string path, int x, int y): base(path, x, y)
+        {
+            _img = SplashKit.LoadBitmap($"menuimg-{path}", path);
+        }
+        public override void Draw()
+        {
+            _img.Draw(X, Y);
+        }
+        public override void Load(StreamReader sr)
+        {
+            base.Load(sr);
+            _img = SplashKit.LoadBitmap($"menuimg-{Text}", Text);
+        }
+    }
 
     // main menu used for:
     // - listing ui elems to select level
@@ -112,6 +133,9 @@ namespace CustomProgram
                         break;
                     case "MenuLabel":
                         widget = new MenuLabel();
+                        break;
+                    case "MenuImage":
+                        widget = new MenuImage();
                         break;
                     default:
                         widget = new MenuLabel();

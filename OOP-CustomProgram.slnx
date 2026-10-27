@@ -1,4 +1,3 @@
 <Solution>
   <Project Path="CustomProgram/CustomProgram.csproj" />
-  <Project Path="Editor/Editor.csproj" />
 </Solution>

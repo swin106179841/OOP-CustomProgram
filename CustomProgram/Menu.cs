@@ -1,4 +1,5 @@
 using System.Dynamic;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using ShapeDrawer;
 using SplashKitSDK;
@@ -21,7 +22,12 @@ namespace CustomProgram
         public void Load(StreamReader sr);
 
     }
-    public class LevelButton : MenuLabel
+    public interface IMenuButton
+    {
+        public void Click();
+        public bool Clicked {get; set;}
+    }
+    public class LevelButton : MenuLabel, IMenuButton
     {
         private string _lvlPath;
         private bool _clicked;
@@ -50,6 +56,25 @@ namespace CustomProgram
         }
         public string LvlPath => _lvlPath;
         public bool Clicked { get => _clicked; set => _clicked = value; }
+    }
+    public class EditorButton : MenuLabel, IMenuButton
+    {
+        private bool _clicked;
+        public EditorButton() : base("Editor", 0, 0)
+        {
+            _clicked = false;
+        }
+        public override void Draw()
+        {
+            SplashKit.FillRectangle(Color.RGBColor(30, 30, 30), X-20, Y-5, W, H);
+            SplashKit.DrawText(Text, Color.White, X, Y);
+        }
+        public bool Clicked { get => _clicked; set => _clicked = value; }
+
+        public void Click()
+        {
+            _clicked = true;
+        }
     }
     public class MenuLabel : IMenuItem
     {
@@ -113,8 +138,9 @@ namespace CustomProgram
     public class MainMenu : Menu
     {
         List<IMenuItem> _widgets;
-        LevelButton? _selected;
+        IMenuButton? _selected;
         string? _chosenLevel;
+        bool _editorRequested = false;
         public MainMenu(string path)
         {
             _widgets = new List<IMenuItem> { };
@@ -137,6 +163,9 @@ namespace CustomProgram
                     case "MenuImage":
                         widget = new MenuImage();
                         break;
+                    case "EditorButton":
+                        widget = new EditorButton();
+                        break;
                     default:
                         widget = new MenuLabel();
                         break;
@@ -153,7 +182,14 @@ namespace CustomProgram
                 if (_selected.Clicked)
                 {
                     _selected.Clicked = false;
-                    _chosenLevel = _selected.LvlPath;
+                    // handle type 
+                    if (_selected as LevelButton != null)
+                    {
+                        _chosenLevel = (_selected as LevelButton)!.LvlPath;
+                    } else if (_selected as EditorButton != null)
+                    {
+                        _editorRequested = true;
+                    }
                 }
             }
 
@@ -176,7 +212,7 @@ namespace CustomProgram
             {
                 if (x > itm.X && x <= itm.W + itm.X && y > itm.Y && y < itm.Y + itm.H)
                 {
-                    _selected = itm as LevelButton;
+                    _selected = itm as IMenuButton;
 
                 }
             }
@@ -185,7 +221,9 @@ namespace CustomProgram
         {
             _selected = null;
             _chosenLevel = null;
+            _editorRequested = false;
         }
         public string? ChosenLevel { get => _chosenLevel; }
+        public bool EditorRequested { get => _editorRequested; }
     }
 }

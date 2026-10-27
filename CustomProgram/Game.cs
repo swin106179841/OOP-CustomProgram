@@ -1,4 +1,5 @@
 using System.Threading.Tasks.Dataflow;
+using ProgramEditor;
 using SplashKitSDK;
 namespace CustomProgram
 {
@@ -11,6 +12,7 @@ namespace CustomProgram
         private Bitmap _winScr;
         private int _winScrFrameCount;
         private MainMenu _mainMenu;
+        private Editor _editor;
         public Game() : this("Temple of Fortune") { }
         public Game(String windowTitle)
         {
@@ -19,6 +21,7 @@ namespace CustomProgram
             _winScr = SplashKit.LoadBitmap("win", "./assets/win.png");
             // load main menu from file
             _mainMenu = new MainMenu("menus/main.menu");
+            _editor = new Editor(_window);
         }
         public void Run()
         {
@@ -86,7 +89,17 @@ namespace CustomProgram
                         _winScrFrameCount = 0;
                     }
 
-                } else
+                } else if (_gameState == GameState.Editor)
+                {
+                    _editor.Run();
+                    if (_editor.QuitEditor)
+                    {
+                        _editor.QuitEditor = false;
+                        _gameState = GameState.Menu;
+                        Settings.RenderScale = _editor.RestoreScale;
+                    }
+                } 
+                else
                 {
                     // in main menu
                     
@@ -106,6 +119,11 @@ namespace CustomProgram
                         _mainMenu.Reset();
                         _gameState = GameState.Playing;
 
+                    } else if (_mainMenu.EditorRequested == true)
+                    {
+                        _editor.Setup();
+                        _mainMenu.Reset();
+                        _gameState = GameState.Editor;
                     }
                 }
                 SplashKit.RefreshScreen(60);

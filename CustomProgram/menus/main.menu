@@ -1,4 +1,4 @@
-3
+4
 LevelButton
 Level 1
 100
@@ -19,3 +19,9 @@ MenuImage
 0
 1
 1
+EditorButton
+Editor
+100
+450
+100
+20

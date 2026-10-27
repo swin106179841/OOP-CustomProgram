@@ -16,6 +16,7 @@ namespace CustomProgram
     {
         Menu,
         Playing,
-        Win
+        Win,
+        Editor
     }
 }

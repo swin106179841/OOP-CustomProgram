@@ -78,6 +78,11 @@ namespace CustomProgram
                     p1.Draw();
                     // check game win to update game state
                     _gameState = myLevel.CheckWin(p1);
+                    // check quiting to menu
+                    if (SplashKit.KeyTyped(KeyCode.EscapeKey))
+                    {
+                        _gameState = GameState.Menu;
+                    }
                 } else if (_gameState == GameState.Win)
                 {
                     _winScr.Draw(_window.Width / 2 - (_winScr.Width / 2), _window.Height / 2 - (_winScr.Height / 2));
@@ -124,6 +129,12 @@ namespace CustomProgram
                         _editor.Setup();
                         _mainMenu.Reset();
                         _gameState = GameState.Editor;
+                    }
+
+                    // quit on escape
+                    if (SplashKit.KeyTyped(KeyCode.EscapeKey))
+                    {
+                        SplashKit.CloseCurrentWindow();
                     }
                 }
                 SplashKit.RefreshScreen(60);
